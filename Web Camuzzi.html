@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Interpost</title>
+    <style>
+        /* Estructura Base */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #f4f6f9;
+        }
+
+        /* Navegación Lateral */
+        .sidebar {
+            width: 260px;
+            background-color: #2c3e50;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            z-index: 10;
+            transition: margin-left 0.4s ease; /* Animación de despliegue */
+        }
+
+        /* Clase dinámica para ocultar la barra */
+        .sidebar.oculta {
+            margin-left: -260px;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #1a252f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        /* Botón de cierre dentro del menú */
+        .btn-cerrar {
+            background: none;
+            border: none;
+            color: #bdc3c7;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .btn-cerrar:hover {
+            color: #ffffff;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links li a {
+            display: block;
+            padding: 15px 20px;
+            color: #bdc3c7;
+            text-decoration: none;
+            border-bottom: 1px solid #1a252f;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            background-color: #34495e;
+            color: #ffffff;
+        }
+
+        /* Contenedor Principal */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            position: relative;
+        }
+
+        /* Botón flotante para abrir el menú */
+        .btn-abrir-menu {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 5;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            font-weight: bold;
+        }
+
+        .btn-abrir-menu:hover {
+            background-color: #34495e;
+        }
+
+        /* ENMASCARAMIENTO DEL IFRAME */
+        .iframe-wrapper {
+            flex-grow: 1;
+            position: relative;
+            overflow: hidden; 
+        }
+
+        .iframe-wrapper iframe {
+            position: absolute;
+            top: -50px; 
+            left: 0;
+            width: 100%;
+            height: calc(100% + 50px); 
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menú Lateral -->
+    <aside class="sidebar oculta" id="sidebar">
+        <div class="sidebar-header">
+            <h2>INTERPOST</h2>
+            <button class="btn-cerrar" onclick="toggleMenu()" title="Cerrar menú">✖</button>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="cambiarSistema('https://script.google.com/macros/s/AKfycbxQHaT9mBxe0xSmwhyHT7uWuHa5foXlG25rPmt3OJnHA4tlsT4_r2c8wS8nbGXt3ziWLA/exec')">Camuzzi - Carga Diaria</a></li>
+            <li><a href="#" onclick="cambiarSistema('URL_SISTEMA_CUL')">Herramienta CUL</a></li>
+            <li><a href="#" onclick="cambiarSistema('URL_SISTEMA_HUB')">Monitor HUB</a></li>
+            <li><a href="#" onclick="cambiarSistema('URL_OTROS')">Otros Temas</a></li>
+        </ul>
+    </aside>
+
+    <!-- Visor de Sistemas -->
+    <main class="main-content">
+        <!-- Botón para mostrar menú cuando está oculto -->
+        <button class="btn-abrir-menu" onclick="toggleMenu()">☰ Menú</button>
+
+        <div class="iframe-wrapper">
+            <iframe id="visor-sistema" src="https://script.google.com/macros/s/AKfycbxQHaT9mBxe0xSmwhyHT7uWuHa5foXlG25rPmt3OJnHA4tlsT4_r2c8wS8nbGXt3ziWLA/exec"></iframe>
+        </div>
+    </main>
+
+    <!-- Script de navegación y animación -->
+    <script>
+        // Función para abrir y cerrar la barra lateral
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('oculta');
+        }
+
+        // Función para cambiar de sistema
+        function cambiarSistema(url) {
+            if(url && url !== '') {
+                document.getElementById('visor-sistema').src = url;
+                // Fuerza el cierre de la barra al seleccionar una opción
+                document.getElementById('sidebar').classList.add('oculta');
+            }
+        }
+    </script>
+
+</body>
+</html>
