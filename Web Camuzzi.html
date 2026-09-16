@@ -25,10 +25,9 @@
             flex-direction: column;
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
             z-index: 10;
-            transition: margin-left 0.4s ease; /* Animación de despliegue */
+            transition: margin-left 0.4s ease;
         }
 
-        /* Clase dinámica para ocultar la barra */
         .sidebar.oculta {
             margin-left: -260px;
         }
@@ -49,7 +48,6 @@
             width: 100%;
         }
 
-        /* Botón de cierre dentro del menú */
         .btn-cerrar {
             background: none;
             border: none;
@@ -91,7 +89,6 @@
             position: relative;
         }
 
-        /* Botón flotante para abrir el menú */
         .btn-abrir-menu {
             position: absolute;
             top: 10px;
@@ -111,7 +108,7 @@
             background-color: #34495e;
         }
 
-        /* ENMASCARAMIENTO DEL IFRAME */
+        /* ENMASCARAMIENTO DEL IFRAME - CORRECCIÓN EXACTA A 36PX */
         .iframe-wrapper {
             flex-grow: 1;
             position: relative;
@@ -120,10 +117,10 @@
 
         .iframe-wrapper iframe {
             position: absolute;
-            top: -50px; 
+            top: -36px; 
             left: 0;
             width: 100%;
-            height: calc(100% + 50px); 
+            height: calc(100% + 36px); 
             border: none;
         }
     </style>
@@ -146,7 +143,6 @@
 
     <!-- Visor de Sistemas -->
     <main class="main-content">
-        <!-- Botón para mostrar menú cuando está oculto -->
         <button class="btn-abrir-menu" onclick="toggleMenu()">☰ Menú</button>
 
         <div class="iframe-wrapper">
@@ -154,18 +150,15 @@
         </div>
     </main>
 
-    <!-- Script de navegación y animación -->
+    <!-- Script de navegación -->
     <script>
-        // Función para abrir y cerrar la barra lateral
         function toggleMenu() {
             document.getElementById('sidebar').classList.toggle('oculta');
         }
 
-        // Función para cambiar de sistema
         function cambiarSistema(url) {
             if(url && url !== '') {
                 document.getElementById('visor-sistema').src = url;
-                // Fuerza el cierre de la barra al seleccionar una opción
                 document.getElementById('sidebar').classList.add('oculta');
             }
         }
